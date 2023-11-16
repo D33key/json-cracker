@@ -1,0 +1,9 @@
+@import url(maintains.css);
+
+body {
+	margin: 0;
+}
+
+.ant-layout-footer {
+	padding: 0;
+}

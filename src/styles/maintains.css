@@ -1,0 +1,22 @@
+.custom-maintains {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	text-align: center;
+}
+
+.custom-footer {
+	max-height: 27px;
+	height: 27px;
+	border-top: 1px solid rgba(79, 84, 92, 0.48);
+	background: rgb(32, 34, 37);
+}
+
+.custom-header {
+	max-height: 36px;
+	height: 36px;
+	padding: 4px 8px;
+	background: rgb(47, 49, 54);
+	color: rgb(185, 187, 190);
+	box-shadow: rgb(32, 34, 37) 0px 1px 0px;
+}
