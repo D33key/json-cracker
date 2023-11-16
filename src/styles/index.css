@@ -7,3 +7,21 @@ body {
 .ant-layout-footer {
 	padding: 0;
 }
+
+.custom-content {
+	background-color: #1c1c1c;
+}
+
+textarea {
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none;
+	background-color: inherit;
+	color: white;
+}
