@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import EditableRow from "../shared/EditableRow/EditableRow";
-import { divs } from "../core/signals";
+import { divs } from "../core/signals/signals";
 
 const { Sider } = Layout;
 
@@ -13,19 +13,7 @@ const siderStyles: React.CSSProperties = {
 };
 
 const EditableSider = () => {
-	// const handleDivClick = (index: number) => {
-	//     const editableDiv = divs.value.filter(div => div.index === index);
-	// 	console.log(editableDiv);
-	// };
-	// const handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
-	// 	const target = event.target as HTMLDivElement;
-	// 	const dataIndex = target.getAttribute("data-index");
 
-	// 	if (dataIndex !== null) {
-	// 		const index = parseInt(dataIndex, 10);
-	// 		handleDivClick(index);
-	// 	}
-	// };
     console.log(divs.value)
 	return (
 		<Sider width={400} style={siderStyles}>
