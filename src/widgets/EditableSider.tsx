@@ -1,6 +1,7 @@
 import { Layout } from "antd";
 import EditableRow from "../shared/EditableRow/EditableRow";
 import { divs } from "../core/signals/signals";
+import { useRef } from "react";
 
 const { Sider } = Layout;
 
@@ -13,8 +14,8 @@ const siderStyles: React.CSSProperties = {
 };
 
 const EditableSider = () => {
+	const ref = useRef<HTMLDivElement | null>(null);
 
-    console.log(divs.value)
 	return (
 		<Sider width={400} style={siderStyles}>
 			{divs.value.map((div, index) => {
