@@ -1,7 +1,6 @@
 import { Layout } from "antd";
 import EditableRow from "../shared/EditableRow/EditableRow";
-import { divs } from "../core/signals/signals";
-import { useRef } from "react";
+import { SignalRow, rows } from "../core/signals/signals";
 
 const { Sider } = Layout;
 
@@ -14,13 +13,39 @@ const siderStyles: React.CSSProperties = {
 };
 
 const EditableSider = () => {
-	const ref = useRef<HTMLDivElement | null>(null);
+	const handleEnterPressed = (index: number) => {
+		const activeRowIndex = rows.value.findIndex((row) => row.index === index);
 
+		if (activeRowIndex !== -1) {
+			const newRow: SignalRow = {
+				name: "span",
+				index: activeRowIndex + 1,
+				active: true,
+				value: {
+					text: "",
+				},
+			};
+
+			rows.value = [
+				...rows.value.slice(0, activeRowIndex + 1),
+				newRow,
+				...rows.value.slice(activeRowIndex + 1),
+			];
+
+			for (let i = activeRowIndex + 2; i < rows.value.length; i++) {
+				rows.value[i].index += 1;
+			}
+		}
+	};
 	return (
 		<Sider width={400} style={siderStyles}>
-			{divs.value.map((div, index) => {
+			{rows.value.map((row, index) => {
 				return (
-					<EditableRow key={`${div.name}-${index}`} divValue={div.value} />
+					<EditableRow
+						key={`${row.name}-${index}`}
+						row={row}
+						onEnterPressed={handleEnterPressed}
+					/>
 				);
 			})}
 		</Sider>

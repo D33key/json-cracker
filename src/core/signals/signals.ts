@@ -1,17 +1,21 @@
 import { signal } from "@preact/signals-react";
 
-interface SignalDiv {
-	name: "div";
-    index: number;
+export interface SignalRow {
+	name: "span";
+	index: number;
+	active: boolean;
 	value: {
 		text: string;
 	};
 }
 
-export const divs = signal([{
-    name: 'div',
-    index: 0,
-    value: {
-        text: 'First'
-    }
-}] as SignalDiv[]);
+export const rows = signal([
+	{
+		name: "span",
+		index: 0,
+		active: true,
+		value: {
+			text: "First",
+		},
+	},
+] as SignalRow[]);
