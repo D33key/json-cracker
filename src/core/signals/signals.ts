@@ -1,4 +1,4 @@
-import { signal } from "@preact/signals-react";
+import { computed, signal } from "@preact/signals-react";
 
 export interface SignalRow {
 	name: "span";
@@ -19,3 +19,5 @@ export const rows = signal([
 		},
 	},
 ] as SignalRow[]);
+
+export const activeRow = computed(() => rows.value.find((row) => row.active));
