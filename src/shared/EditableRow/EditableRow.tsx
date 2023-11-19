@@ -28,8 +28,7 @@ const EditableRow = ({ row }: { row: SignalRow }) => {
 			handleBlur();
 			handleEnterPressed(row.index);
 		} else if (event.code === "Backspace") {
-			// handleBlur();
-			handleBackspace(row.index);
+			handleBackspace();
 		}
 	};
 	const handleChangeText = (event: React.ChangeEvent<HTMLSpanElement>) => {
