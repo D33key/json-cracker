@@ -10,6 +10,7 @@ const siderStyles: React.CSSProperties = {
 	borderRight: "1px solid rgba(204, 204, 204, 0.2)",
 	textAlign: "left",
 	lineHeight: 120,
+	overflow: 'auto'
 };
 
 const EditableSider = () => {

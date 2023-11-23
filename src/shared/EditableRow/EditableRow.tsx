@@ -1,7 +1,13 @@
 import { Col, Row } from "antd";
 import { useRef } from "react";
-import { SignalRow } from "../../core/signals/signals";
+import { SignalRow, rows } from "../../core/signals/signals";
 import { handleBackspace, handleEnterPressed } from "../../widgets/utils";
+import {
+	addRootKey,
+	createObjectFromFormatedJSON,
+	replacer,
+	splitStringByNewLineWithWhitespace,
+} from "../../core/utils";
 
 const EditableRow = ({ row }: { row: SignalRow }) => {
 	const ref = useRef<HTMLSpanElement | null>(null);
@@ -31,6 +37,40 @@ const EditableRow = ({ row }: { row: SignalRow }) => {
 			handleBackspace();
 		}
 	};
+
+	const handlePaste = (event: ClipboardEvent) => {
+		event.preventDefault();
+		if (event.clipboardData) {
+			try {
+				const currentIndex = row.index;
+				const pastedTextAsJSON = addRootKey(
+					event.clipboardData.getData("Text"),
+					"glossary"
+				);
+
+				const formattedJSONString = JSON.stringify(
+					pastedTextAsJSON,
+					replacer,
+					4
+				);
+
+				const arrayOfLines =
+					splitStringByNewLineWithWhitespace(formattedJSONString);
+
+				const newArrayOfPastedText = createObjectFromFormatedJSON(
+					arrayOfLines,
+					currentIndex
+				);
+				rows.value = [
+					...rows.value.slice(0, currentIndex),
+					...newArrayOfPastedText.slice(),
+				];
+			} catch (error) {
+				console.error("Invalid JSON:", (error as Error).message);
+			}
+		}
+	};
+
 	const handleChangeText = (event: React.ChangeEvent<HTMLSpanElement>) => {
 		if (event.currentTarget.textContent)
 			row.value.text = event.currentTarget.textContent;
@@ -58,6 +98,7 @@ const EditableRow = ({ row }: { row: SignalRow }) => {
 					onKeyDown={handleKeyPress}
 					onBlur={handleBlur}
 					onInput={handleChangeText}
+					onPaste={handlePaste}
 					style={{
 						display: "block",
 						width: "100%",
